@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Motivation Quotes Generator | By Khubaib Lodhi</title>
+</head>
+<body>
+    <div class="container">
+        <div class="quotes">
+            <div class="heading">Motivation Quotes Generator !!</div>
+            <div class="heading">Developed By Khubaib Lodhi</div>
+            <div class="button">
+                <button class="btn" onclick="quotes()">Click</button>
+            </div>
+            <div class="quotes-display">
+                <h1 class="error">
+                    Error! No more Quotes Found!
+                </h1>
+                <h1 class="advice">
+                    <span>Motivation Quotes: </span><span id="advice"></span>
+                </h1>
+            </div>
+        </div>
+        <div class="links">
+            <ul class="list">
+                <li><a href="https://www.linkedin.com/in/khubaib-lodhi-954962218/" target="_blank"><i class="fa-brands fa-linkedin-in fa-bounce fa-lg" id="linkedin" style="color: #1a4899;"></i></a></li>
+                <li><a href="https://www.instagram.com/khubaibl/" target="_blank"><i class="fa-brands fa-instagram fa-bounce fa-lg" id="insta"  style="color: #c12fb5;"></i></a></li>
+                <li><a href="https://github.com/lodhikhubaib" target="_blank"><i class="fa-brands fa-github fa-bounce fa-lg" id="git"  style="color: #3a9856;"></i></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script  src="https://kit.fontawesome.com/1b94c89d79.js" crossorigin="anonymous"></script>
+    
+    <script>
+        const api = "https://api.adviceslip.com/advice";
+        const btn = document.querySelectorAll(".button .btn");
+        async function quotes(){
+            let response = await fetch(api);
+            let data = await response.json();
+            console.log(data);
+            if(response.status == 404){
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".advice").style.display = "none";
+            }
+            else{
+            document.querySelector(".quotes-display #advice").innerHTML = data.slip.advice;
+                document.querySelector(".error").style.display = "none";
+                document.querySelector(".advice").style.display = "block";
+            }
+        }
+
+    </script>
+</body>
+</html>
